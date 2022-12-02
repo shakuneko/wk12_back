@@ -11,13 +11,9 @@ def db_feed(db: Session):
     new_product_list = [DbProduct(
         category=product["category"],
         name=product["name"],
-        sku=product["sku"],
-        price=product["price"],
         image=product["image"],
-        description=product["description"],
         description_long=product["description_long"],
-        currency=product["currency"],
-        countInStock=product["countInStock"]
+
     ) for product in products]
     db.query(DbProduct).delete()
     db.commit()
@@ -30,13 +26,8 @@ def create(db: Session, request: ProductRequestSchema):
     new_product = DbProduct(
         category=request.category,
         name=request.name,
-        sku=request.sku,
-        price=request.price,
         image=request.image,
-        description=request.description,
         description_long=request.description_long,
-        currency=request.currency,
-        countInStock=request.countInStock
     )
     db.add(new_product)
     db.commit()
